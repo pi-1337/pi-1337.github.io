@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <title>why2025-Somkracht-65537</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });">
+</script>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>why2025-Somkracht-65537 | My New Hugo Site</title>
+<meta name="keywords" content="">
+<meta name="description" content="🎯 The Challenge
+This is a fun RSA challenge with an interesting twist! Instead of factoring the modulus (N), we recover the message directly using a clever insight.
+Given:
+Public Key:
+$$
+((e, N))
+$$
+Ciphertext (encrypted in regular RSA):
+$$
+ct_1 = m^e \bmod N
+$$
+Additionnal leak (this is unusual in secure RSA):
+$$
+ct_2 = m^{p&#43;q} \bmod N
+$$
+
+Note: Primes (p, q) are huge, so factoring (N) is infeasible, but the leak opens a new attack vector.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/why2025-somkracht-65537/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/why2025-somkracht-65537/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script></head>
+<body><header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="My New Hugo Site (Alt + H)">My New Hugo Site</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+    
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      why2025-Somkracht-65537
+    </h1>
+    <div class="post-meta"><span title='2026-02-03 00:00:00 +0000 UTC'>February 3, 2026</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="-the-challenge">🎯 The Challenge<a hidden class="anchor" aria-hidden="true" href="#-the-challenge">#</a></h2>
+<p>This is a fun RSA challenge with an interesting twist! Instead of factoring the modulus (N), we recover the message directly using a clever insight.</p>
+<h3 id="given">Given:<a hidden class="anchor" aria-hidden="true" href="#given">#</a></h3>
+<h4 id="public-key">Public Key:<a hidden class="anchor" aria-hidden="true" href="#public-key">#</a></h4>
+<p>$$
+((e, N))
+$$</p>
+<h4 id="ciphertext-encrypted-in-regular-rsa">Ciphertext (encrypted in regular RSA):<a hidden class="anchor" aria-hidden="true" href="#ciphertext-encrypted-in-regular-rsa">#</a></h4>
+<p>$$
+ct_1 = m^e \bmod N
+$$</p>
+<h4 id="additionnal-leak-this-is-unusual-in-secure-rsa">Additionnal leak (this is unusual in secure RSA):<a hidden class="anchor" aria-hidden="true" href="#additionnal-leak-this-is-unusual-in-secure-rsa">#</a></h4>
+<p>$$
+ct_2 = m^{p+q} \bmod N
+$$</p>
+<blockquote>
+<p><strong>Note:</strong> Primes (p, q) are huge, so factoring (N) is infeasible, but the leak opens a new attack vector.</p>
+</blockquote>
+<hr>
+<h2 id="-the-solution-approach">💡 The Solution Approach<a hidden class="anchor" aria-hidden="true" href="#-the-solution-approach">#</a></h2>
+<h3 id="eulers-totient">Euler&rsquo;s Totient:<a hidden class="anchor" aria-hidden="true" href="#eulers-totient">#</a></h3>
+<p>$$
+\phi(N) = (p-1)(q-1) = pq - p - q + 1 = N + 1 - (p + q)
+$$</p>
+<h3 id="eulers-theorem">Euler&rsquo;s theorem:<a hidden class="anchor" aria-hidden="true" href="#eulers-theorem">#</a></h3>
+<p>$$
+a^{\phi(N)} \equiv 1 \pmod{N} \implies a^{\phi(N) + 1} \equiv a \pmod{N}
+$$</p>
+<h3 id="the-trick">The trick:<a hidden class="anchor" aria-hidden="true" href="#the-trick">#</a></h3>
+<p>Express (N) as</p>
+<p>$$
+N = \alpha e + \beta, \quad \text{with } \beta &lt; e
+$$</p>
+<p>Define</p>
+<p>$$
+\gamma = e - \beta - 1
+$$</p>
+<p>so</p>
+<p>$$
+e = \gamma + \beta + 1
+$$</p>
+<h3 id="key-calculation">Key calculation:<a hidden class="anchor" aria-hidden="true" href="#key-calculation">#</a></h3>
+<p>$$
+m_{\to \gamma}  \equiv ct_1^{\alpha + 1} \cdot ct_2^{-1} \bmod N \
+$$</p>
+<p>$$
+\equiv m^{e(\alpha + 1)} \cdot m^{-(p+q)} \bmod N \
+$$</p>
+<p>$$
+\equiv m^{e\alpha + e - (p+q)} \bmod N \
+$$</p>
+<p>$$
+\equiv m^{N + \gamma + 1 - (p+q)} \bmod N \
+$$</p>
+<p>$$
+\equiv m^{\phi(N) + \gamma} \bmod N \
+$$</p>
+<p>$$
+\equiv m^{\phi(N)} \cdot m^{\gamma} \bmod N \
+$$</p>
+<p>$$
+\equiv 1 \cdot m^{\gamma} \bmod N \
+$$</p>
+<p>$$
+\equiv m^{\gamma} \bmod N
+$$</p>
+<hr>
+<h3 id="recovering-m-with-bézouts-lemma">Recovering (m) with Bézout’s lemma:<a hidden class="anchor" aria-hidden="true" href="#recovering-m-with-bézouts-lemma">#</a></h3>
+<p>Since</p>
+<p>$$
+\gcd(e, \gamma) = 1
+$$</p>
+<p>there exist integers (x, y) with</p>
+<p>$$
+e x + \gamma y = 1
+$$</p>
+<p>Thus</p>
+<p>$$
+m = (ct_1^x \cdot m_{\to \gamma}^y) \bmod N
+$$</p>
+<p>because</p>
+<p>$$
+(ct_1^x \cdot m_{\to \gamma}^y) \bmod N \equiv (m^{e x} \cdot m^{\gamma y}) \bmod N \
+$$</p>
+<p>$$
+\equiv m^{e x + \gamma y} \bmod N \
+$$</p>
+<p>$$
+\equiv m^1 \bmod N \
+$$</p>
+<p>$$
+\equiv m \bmod N
+$$</p>
+<hr>
+<h2 id="-implementation">🖥️ Implementation<a hidden class="anchor" aria-hidden="true" href="#-implementation">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> long_to_bytes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Given</span>
+</span></span><span style="display:flex;"><span>e <span style="color:#f92672">=</span> <span style="color:#ae81ff">65537</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>very_large_number<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>ct1 <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>ciphertext_1<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>ct2 <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>ciphertext_2<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>alpha <span style="color:#f92672">=</span> N <span style="color:#f92672">//</span> e
+</span></span><span style="display:flex;"><span>beta <span style="color:#f92672">=</span> N <span style="color:#f92672">%</span> e
+</span></span><span style="display:flex;"><span>gamma <span style="color:#f92672">=</span> e <span style="color:#f92672">-</span> beta <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;alpha = </span><span style="color:#e6db74">{</span>alpha<span style="color:#e6db74">}</span><span style="color:#e6db74">, beta = </span><span style="color:#e6db74">{</span>beta<span style="color:#e6db74">}</span><span style="color:#e6db74">, gamma = </span><span style="color:#e6db74">{</span>gamma<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>m_to_gamma <span style="color:#f92672">=</span> (pow(ct1, alpha <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, N) <span style="color:#f92672">*</span> pow(ct2, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, N)) <span style="color:#f92672">%</span> N
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extended_gcd</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> a <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (b, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    gcd, x1, y1 <span style="color:#f92672">=</span> extended_gcd(b <span style="color:#f92672">%</span> a, a)
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> y1 <span style="color:#f92672">-</span> (b <span style="color:#f92672">//</span> a) <span style="color:#f92672">*</span> x1
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> x1
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (gcd, x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>gcd, x, y <span style="color:#f92672">=</span> extended_gcd(e, gamma)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> (pow(ct1, x, N) <span style="color:#f92672">*</span> pow(m_to_gamma, y, N)) <span style="color:#f92672">%</span> N
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Recovered flag:&#34;</span>, long_to_bytes(flag))
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+  </main>
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">My New Hugo Site</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+</html>
+
