@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <title>Hello Crypto</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });">
+</script>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Hello Crypto | My New Hugo Site</title>
+<meta name="keywords" content="">
+<meta name="description" content="It works 🎉
+Write-up for ImpersonatorTwo challenge from Ethernaut CTF
+This challenge is a part of The Ethernaut CTF and It is the 37th challenge.
+This is the description of the challenge:
+The goal of this level is for you to steal all the funds from the contract.
+Things that might help:
+
+Look carefully at the 2 signatures that the owner of the contract used to lock it and set the admin.
+
+Prerequisites
+
+High level knowledge of ECC and ECDSA.
+familiarity with solidity code.
+
+if you are not familiar with ECC and ECDSA, I recommend you finish this course on Cryptohack.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/test/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/test/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script></head>
+<body><header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="My New Hugo Site (Alt + H)">My New Hugo Site</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+    
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Hello Crypto
+    </h1>
+    <div class="post-meta"><span title='2026-02-03 00:00:00 +0000 UTC'>February 3, 2026</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="it-works-">It works 🎉<a hidden class="anchor" aria-hidden="true" href="#it-works-">#</a></h2>
+<h1 id="write-up-for-impersonatortwo-challenge-from-ethernaut-ctf">Write-up for ImpersonatorTwo challenge from Ethernaut CTF<a hidden class="anchor" aria-hidden="true" href="#write-up-for-impersonatortwo-challenge-from-ethernaut-ctf">#</a></h1>
+<p>This challenge is a part of <a href="https://ethernaut.openzeppelin.com">The Ethernaut CTF</a> and It is the 37th challenge.
+This is the description of the challenge:</p>
+<p><em>The goal of this level is for you to steal all the funds from the contract.</em></p>
+<p><em>Things that might help:</em></p>
+<ul>
+<li><em>Look carefully at the 2 signatures that the owner of the contract used to lock it and set the admin.</em></li>
+</ul>
+<h1 id="prerequisites">Prerequisites<a hidden class="anchor" aria-hidden="true" href="#prerequisites">#</a></h1>
+<ul>
+<li>High level knowledge of ECC and ECDSA.</li>
+<li>familiarity with solidity code.</li>
+</ul>
+<p><em>if you are not familiar with ECC and ECDSA, I recommend you finish this course on <a href="https://cryptohack.org/courses/elliptic/course_details/">Cryptohack</a>.</em></p>
+<h3 id="code">code:<a hidden class="anchor" aria-hidden="true" href="#code">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: MIT
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">28</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> {Ownable} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;openzeppelin-contracts-08/access/Ownable.sol&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> {ECDSA} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;openzeppelin-contracts-08/utils/cryptography/ECDSA.sol&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> {Strings} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;openzeppelin-contracts-08/utils/Strings.sol&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">ImpersonatorTwo</span> <span style="color:#66d9ef">is</span> Ownable {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">using</span> Strings <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">uint256</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    error NotAdmin();
+</span></span><span style="display:flex;"><span>    error InvalidSignature();
+</span></span><span style="display:flex;"><span>    error FundsLocked();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">public</span> admin;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint256</span> <span style="color:#66d9ef">public</span> nonce;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> locked;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">constructor</span>() <span style="color:#66d9ef">payable</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">modifier</span> <span style="color:#a6e22e">onlyAdmin</span>() {
+</span></span><span style="display:flex;"><span>        require(msg.sender <span style="color:#f92672">==</span> admin, NotAdmin());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">_</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setAdmin</span>(<span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> signature, <span style="color:#66d9ef">address</span> newAdmin) <span style="color:#66d9ef">public</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">memory</span> message <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;admin&#34;</span>, nonce.toString(), newAdmin));
+</span></span><span style="display:flex;"><span>        require(_verify(hash_message(message), signature), InvalidSignature());
+</span></span><span style="display:flex;"><span>        nonce<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        admin <span style="color:#f92672">=</span> newAdmin;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">switchLock</span>(<span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> signature) <span style="color:#66d9ef">public</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">memory</span> message <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;lock&#34;</span>, nonce.toString()));
+</span></span><span style="display:flex;"><span>        require(_verify(hash_message(message), signature), InvalidSignature());
+</span></span><span style="display:flex;"><span>        nonce<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        locked <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>locked;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withdraw</span>() <span style="color:#66d9ef">public</span> onlyAdmin {
+</span></span><span style="display:flex;"><span>        require(<span style="color:#f92672">!</span>locked, FundsLocked());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">payable</span>(admin).transfer(<span style="color:#66d9ef">address</span>(this).balance);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hash_message</span>(<span style="color:#66d9ef">string</span> <span style="color:#66d9ef">memory</span> message) <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">pure</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bytes32</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ECDSA.toEthSignedMessageHash(abi.encodePacked(message));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">_verify</span>(<span style="color:#66d9ef">bytes32</span> hash, <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> signature) <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ECDSA.recover(hash, signature) <span style="color:#f92672">==</span> owner();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="code-analysis">Code Analysis<a hidden class="anchor" aria-hidden="true" href="#code-analysis">#</a></h1>
+<p>It looks like a challenge where we have to somehow bypass the ECDSA verification process, which we know is <em>impossible</em> unless there is a problem in the implementation.</p>
+<p>Why <em>impossible</em>, you ask ?
+Well It is because ECDSA is based on <em>Elliptic Curve Cryptography</em> which is one of modern public-key cryptosystems in modern cryptography. And It is considered secure because of the Hardness of the EC-DLP problem (Elliptic Curve Discrete Log Problem).</p>
+<p>Elliptic Curve Discrete Log Problem is the problem defined as:</p>
+<p>$$
+\text{given two Elliptic Curve points } G \text{ and } P \text{ in an Elliptic Curve } E
+$$</p>
+<p>$$
+\text{find d such that }
+$$</p>
+<p>$$
+P = d * G
+$$</p>
+<p>$$
+\text{where } * \text{ denotes the scalar multiplication on } E
+$$</p>
+<p>$$
+\text{This problem is considered and believed to be a Hard problem, more precisely and formaly, It is an NP problem.}
+$$</p>
+<p>The secret behind this challenge is the two signatures signed by owner of the contract. How do i know that ?
+Well the description says &ldquo;<em>Look carefully at the 2 signatures that the owner of the contract used to lock it and set the admin</em>&rdquo;.</p>
+<p>This is a hint !!
+So I created an instance and went to the explorer &ldquo;<em>explorer</em>/tx/&lt;TX_HASH&gt;/advanced#internal&rdquo;, to see the details of instance creation TX, in order to see the two signatures used for both unlocking and setting the admin.
+(<em>TX_HASH is the hash of the transaction of the creation of the instance. I got it from the internal transactions of the created instance.</em>)</p>
+<p>here are the two signatures the owner signed :</p>
+<pre tabindex="0"><code>	Function: switchLock(bytes signature) ***
+	
+	MethodID: 0xfd0268fb
+	[0]:  0000000000000000000000000000000000000000000000000000000000000020
+	[1]:  0000000000000000000000000000000000000000000000000000000000000041
+	[2]:  e5648161e95dbf2bfc687b72b745269fa906031e2108118050aba59524a23c40
+	[3]:  70026fc30e4e02a15468de57155b080f405bd5b88af05412a9c3217e028537e3
+	[4]:  1b00000000000000000000000000000000000000000000000000000000000000
+</code></pre><pre tabindex="0"><code>	Function: setAdmin(bytes domain_,address newAdmin) ***
+	
+	MethodID: 0x865fc3f3
+	[0]:  0000000000000000000000000000000000000000000000000000000000000040
+	[1]:  000000000000000000000000ada4affe581d1a31d7f75e1c5a3a98b2d4c40f68
+	[2]:  0000000000000000000000000000000000000000000000000000000000000041
+	[3]:  e5648161e95dbf2bfc687b72b745269fa906031e2108118050aba59524a23c40
+	[4]:  4c3ac03b268ae1d2aca1201e8a936adf578a8b95a49986d54de87cd0ccb68a79
+	[5]:  1b00000000000000000000000000000000000000000000000000000000000000
+</code></pre><p>I kept looking at this for a while, then I instantly noticed the disaster, repeated $r$ ???</p>
+<p>But what is $r$ ?</p>
+<p>$r$ is the x-coordinate of $k*G$</p>
+<p>$$
+r = x(k \cdot G), \quad
+$$</p>
+<p>$$
+\text{where $k$ is the nonce of the signature.}
+$$</p>
+<p>$$
+\text{For two $r$ values ($r_1, r_2$) to be equal:}
+$$</p>
+<p>$$
+x(k_1 \cdot G) = x(k_2 \cdot G), \quad
+$$</p>
+<p>$$
+\text{where $x()$ is the x-coordinate of the point.}
+$$</p>
+<p>Just to be clear, this does not necessarily mean that the nonce is repeated, the two nonce might just be opposites of each other</p>
+<p>$$
+k1 = -k2 \mod n
+$$</p>
+<p>$$
+\text{where n is the order of Ellpitic Curve Secp256k1 used in Bitcoin and Ethereum}
+$$</p>
+<p>but since the two v&rsquo;s are equal :</p>
+<p>$$(v1 = v2)$$</p>
+<p>This settles it !! the nonces are the same $k_1 = k_2$.
+Why ? Because these two tell us basically if point is above the half of the order.
+TL:DR: same $r$ and same $v$ means same $k$.</p>
+<p>Which is a thing you never do in ECDSA, it is a famous security problem in ECDSA.</p>
+<p>Nonce reuse is such a big deal because for different s1 and s2 if r1 = r2, one can efficiently recover the PRIVATE key of the signer
+Meaning the attacker can actually sign ANY transaction in the name of the victim, for example stealing all funds anytime.</p>
+<h3 id="why-is-nonce-reuse-a-probelm-">Why is nonce reuse a probelm ?<a hidden class="anchor" aria-hidden="true" href="#why-is-nonce-reuse-a-probelm-">#</a></h3>
+<p>This is the signing equation of ECDSA :</p>
+<p>$$
+s_i = k_i^{-1}(z_i + r_i.x)
+$$</p>
+<p>$$
+\text{where }z_i\text{ is the hash of a message being signed }m_i
+$$</p>
+<p>$$
+\text{given two such equations where the r and k are repeated :}
+$$</p>
+<p>$$
+s_1 \equiv k^{-1}.(z_1 + r.x) \pmod{n}
+$$</p>
+<p>$$
+s_2 \equiv k^{-1}.(z_2 + r.x) \pmod{n}
+$$</p>
+<p>It is possible to recover $k$, which is dangerous, here is why :</p>
+<p>$$
+\text{since k is reused in the two signatures.}
+$$</p>
+<p>$$
+\text{recovery of the nonce }k :
+$$</p>
+<p>$$
+(1):
+s_1 \equiv k^{-1}.(z_1 + r.x) \pmod{n}
+$$</p>
+<p>$$
+s_2 \equiv k^{-1}.(z_2 + r.x) \pmod{n}
+$$</p>
+<p>$$
+\iff\
+k.s_1 \equiv z_1 + r.x \pmod{n}
+$$</p>
+<p>$$
+k.s_2 \equiv z_2 + r.x \pmod{n}
+$$</p>
+<p>$$
+\iff\
+k.(s_1 - s_2) \equiv z_1 + r.x - z_2 - r.x \pmod{n}
+$$</p>
+<p>$$
+\iff\
+k.(s_1 - s_2) \equiv z_1 - z_2 \pmod{n}
+$$</p>
+<p>$$
+\iff\
+k \equiv (z_1 - z_2).(s_1 - s_2)^{-1} \pmod{n}
+$$</p>
+<p>As you can see above, efficient recovery of the nonce key, now what ?
+Next is the private key of the signer (the owner of the contract):</p>
+<p>$$
+\text{now we already calculated } k
+$$</p>
+<p>$$
+\text{recovery of the private key }x :
+$$</p>
+<p>$$
+(1):
+s_1 \equiv k^{-1}.(z_1 + r.x) \pmod{n}
+$$</p>
+<p>$$
+s_2 \equiv k^{-1}.(z_2 + r.x) \pmod{n}
+$$</p>
+<p>$$
+\iff\
+k.s_1 \equiv z_1 + r.x \pmod{n}
+$$</p>
+<p>$$
+k.s_2 \equiv z_2 + r.x \pmod{n}
+$$</p>
+<p>$$
+\iff\
+k.s_1 -  z_1 \equiv r.x \pmod{n}
+$$</p>
+<p>$$
+k.s_2 -  z_2 \equiv r.x \pmod{n}
+$$</p>
+<p>$$
+\iff\
+r.x \equiv k.s_1 - z_1 \pmod{n}
+$$</p>
+<p>$$
+r.x \equiv k.s_2 - z_2 \pmod{n}
+$$</p>
+<p>$$
+\iff\
+x \equiv (k.s_1 - z_1).r^{-1} \pmod{n}
+$$</p>
+<p>$$
+x \equiv (k.s_2 - z_2).r^{-1} \pmod{n}
+$$</p>
+<p>Now there you have it, two ways to calculate the private key.</p>
+<p>So now that we know the vulnerability, and the exploit, it is time to script.
+We are gonna use foundry scripts in the solve, but because there is a lot of math here, we gonna need to use Python or much better Sagemath.</p>
+<h3 id="scripting">Scripting<a hidden class="anchor" aria-hidden="true" href="#scripting">#</a></h3>
+<p>First is the Sagemath script that recovers the private key :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># SECP256K1</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F</span>  <span style="color:#75715e"># Prime modulus</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># Curve parameter a for secp256k1</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>  <span style="color:#75715e"># Curve parameter b for secp256k1</span>
+</span></span><span style="display:flex;"><span>G_x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x79BE667EF9DCBBAC55A62DAD8B8D8D1D7D20A1B395B6B5D4A82A2F5D4C9D75E9</span>  <span style="color:#75715e"># Base point G_x</span>
+</span></span><span style="display:flex;"><span>G_y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199E48B6B6CC0D2007</span>  <span style="color:#75715e"># Base point G_y</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>E <span style="color:#f92672">=</span> EllipticCurve(GF(p), [a, b])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>G <span style="color:#f92672">=</span> E(<span style="color:#ae81ff">0x79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798</span>, <span style="color:#ae81ff">0x483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8</span>)
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> G<span style="color:#f92672">.</span>order()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recoverPrivateKey</span>(r, s1, s2, z1, z2):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    recovers private key and nonce from two signatures with the same nonce
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    r_i = k_i.G
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    s_i = k_i(z_i + r_i.x)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">=</span> ((z1 <span style="color:#f92672">-</span> z2)<span style="color:#f92672">*</span>pow(s1<span style="color:#f92672">-</span>s2, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, n)) <span style="color:#f92672">%</span> n
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    privatekey1 <span style="color:#f92672">=</span> ((s1<span style="color:#f92672">*</span>k<span style="color:#f92672">-</span>z1) <span style="color:#f92672">*</span> pow(r, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, n)) <span style="color:#f92672">%</span> n
+</span></span><span style="display:flex;"><span>    privatekey2 <span style="color:#f92672">=</span> ((s2<span style="color:#f92672">*</span>k<span style="color:#f92672">-</span>z2) <span style="color:#f92672">*</span> pow(r, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, n)) <span style="color:#f92672">%</span> n
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># everything is good</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> privatekey1 <span style="color:#f92672">==</span> privatekey2
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> k, privatekey2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;==== sanity check ====&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">31415926535897963238</span>
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">=</span> <span style="color:#ae81ff">123456789</span>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> int((k<span style="color:#f92672">*</span>G)<span style="color:#f92672">.</span>xy()[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>z1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">789456123545467878654</span>
+</span></span><span style="display:flex;"><span>s1 <span style="color:#f92672">=</span> ((z1 <span style="color:#f92672">+</span> r<span style="color:#f92672">*</span>x)<span style="color:#f92672">*</span>pow(k, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, n)) <span style="color:#f92672">%</span> n
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>z2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">456789321654654798954</span>
+</span></span><span style="display:flex;"><span>s2 <span style="color:#f92672">=</span> ((z2 <span style="color:#f92672">+</span> r<span style="color:#f92672">*</span>x)<span style="color:#f92672">*</span>pow(k, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, n)) <span style="color:#f92672">%</span> n
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>print(recoverPrivateKey(r, s1, s2, z1, z2))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;==== actual private key recovery ====&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xe5648161e95dbf2bfc687b72b745269fa906031e2108118050aba59524a23c40</span>;
+</span></span><span style="display:flex;"><span>s2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x70026fc30e4e02a15468de57155b080f405bd5b88af05412a9c3217e028537e3</span>;
+</span></span><span style="display:flex;"><span>v2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">27</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xe5648161e95dbf2bfc687b72b745269fa906031e2108118050aba59524a23c40</span>;
+</span></span><span style="display:flex;"><span>s1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4c3ac03b268ae1d2aca1201e8a936adf578a8b95a49986d54de87cd0ccb68a79</span>;
+</span></span><span style="display:flex;"><span>v1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">27</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># I got these from foundry script below,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># keep reading to understand how i got them</span>
+</span></span><span style="display:flex;"><span>z1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x6a0d6cd0c2ca5d901d94d52e8d9484e4452a3668ae20d63088909611a7dccc51</span>
+</span></span><span style="display:flex;"><span>z2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x937fa99fb61f6cd81c00ddda80cc218c11c9a731d54ce8859cb2309c77b79bf3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>k, privatekey <span style="color:#f92672">=</span> recoverPrivateKey(r1, s1, s2, z1, z2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print((k<span style="color:#f92672">*</span>G)<span style="color:#f92672">.</span>xy()[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> r1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>privatekey <span style="color:#f92672">=</span> hex(privatekey)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>k<span style="color:#e6db74">=}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>privatekey<span style="color:#e6db74">=}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>Running it gives us:</p>
+<pre tabindex="0"><code>==== sanity check ====
+(123456789, 31415926535897963238)
+==== actual private key recovery ====
+True
+k=115792089237316195423570985008687907852837564279074904382605163141518161463000
+privatekey=&#39;0x10a6891de55baf453d66c5faede86eabccf93f3d284540d205f24207670855cc&#39;
+</code></pre><p>Note: the privatekey we just got is the actual private key of the wallet, so we really hacked the wallet of the owner, if we add an account in metamask with this private key and see the public key, it&rsquo;s gonna be the same as the owner of the contract (<em>we can even transfer ownership</em>).</p>
+<p>Now for the Foundry script :</p>
+<p>Note: to get $z_1$ and $z_2$ that are not stored on the Blockchain, we have to go back in time, I went to etherscan and activate &ldquo;advanced mode&rdquo;, and seen the the function calls done in the instance creation transaction, and to get the hashes of the messages, I had to know what function took effect the first, it turns out that the function at the top is the last executed :</p>
+<p><img alt="etherscan" loading="lazy" src="etherscan.webp"></p>
+<p>In this example, this means that the <em>switchLock</em> function is executed after <em>setAdmin</em>.
+Why is this important ?
+Because the call to these two function increments the <em>nonce</em> state variable which changes the hash of the message being signed (nonce here is not $k$ !!!!!!).</p>
+<p>So now if the order of signing that the owner did is <em>setAdmin</em> then <em>switchLock</em>, this means we have to the same thing but in the opposite order like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#66d9ef">uint256</span> nonce <span style="color:#f92672">=</span> instance.nonce(); <span style="color:#75715e">// this is the current nonce of the contract
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>nonce<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">address</span> newAdmin <span style="color:#f92672">=</span> instance.admin();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">string</span> <span style="color:#66d9ef">memory</span> message1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;admin&#34;</span>, Strings.toString(nonce), newAdmin));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bytes32</span> z1 <span style="color:#f92672">=</span> instance.hash_message(message1);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>nonce<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">string</span> <span style="color:#66d9ef">memory</span> message2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;lock&#34;</span>, Strings.toString(nonce)));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bytes32</span> z2 <span style="color:#f92672">=</span> instance.hash_message(message2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>console.logBytes32(z1);
+</span></span><span style="display:flex;"><span>console.logBytes32(z2);
+</span></span></code></pre></div><p>Now we can get the <em>deterministic</em> hashes of the two messages the owner signed.
+Which we will pass to the Sagemath script to recover the private key, and then sign a new message.</p>
+<p>Now that we have the private key of the signer, we can do anything, one of them is stealing the funds from the contract.
+Plan is to set my self as the admin, then unlock funds (<em>these two tasks both need signature forgery</em>).
+After that we just withdraw funds from the contract.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">uint256</span> victimPrivateKey <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x10a6891de55baf453d66c5faede86eabccf93f3d284540d205f24207670855cc</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// got from the Sagemath script
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">string</span> <span style="color:#66d9ef">memory</span> message <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;admin&#34;</span>, Strings.toString(instance.nonce()), me));
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">uint8</span> v, <span style="color:#66d9ef">bytes32</span> r, <span style="color:#66d9ef">bytes32</span> s) <span style="color:#f92672">=</span> vm.sign(victimPrivateKey, instance.hash_message(message));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> forgedSignature <span style="color:#f92672">=</span> <span style="color:#66d9ef">bytes</span>.concat(r, s, <span style="color:#66d9ef">bytes1</span>(v));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>instance.setAdmin(forgedSignature, me);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>message <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;lock&#34;</span>, Strings.toString(instance.nonce())));
+</span></span><span style="display:flex;"><span>(v, r, s) <span style="color:#f92672">=</span> vm.sign(victimPrivateKey, instance.hash_message(message));
+</span></span><span style="display:flex;"><span>forgedSignature <span style="color:#f92672">=</span> <span style="color:#66d9ef">bytes</span>.concat(r, s, <span style="color:#66d9ef">bytes1</span>(v));
+</span></span><span style="display:flex;"><span>instance.switchLock(forgedSignature);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>console.logBytes32(<span style="color:#66d9ef">bytes32</span>(<span style="color:#66d9ef">address</span>(instance).balance));
+</span></span><span style="display:flex;"><span>instance.withdraw();
+</span></span><span style="display:flex;"><span>console.logBytes32(<span style="color:#66d9ef">bytes32</span>(<span style="color:#66d9ef">address</span>(instance).balance));
+</span></span></code></pre></div><h3 id="final-foundry-script">Final Foundry Script<a hidden class="anchor" aria-hidden="true" href="#final-foundry-script">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: MIT
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">28</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> {Script, console} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;forge-std/Script.sol&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> { ImpersonatorTwo} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;../src/ImpersonatorTwo.sol&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> { Strings } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;@openzeppelin/contracts/utils/Strings.sol&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> {ECDSA} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;openzeppelin-contracts/contracts/utils/cryptography/ECDSA.sol&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">ImpersonatorTwoSolver</span> <span style="color:#66d9ef">is</span> Script {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ImpersonatorTwo <span style="color:#66d9ef">public</span> instance <span style="color:#f92672">=</span> ImpersonatorTwo(<span style="color:#ae81ff">0x3239d91108EcD565Fde17BD6a7D68305FCA2E3AF</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">uint256</span> prv <span style="color:#f92672">=</span> vm.envUint(<span style="color:#e6db74">&#34;PRV&#34;</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">address</span> me <span style="color:#f92672">=</span> vm.envAddress(<span style="color:#e6db74">&#34;PUB&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">run</span>() <span style="color:#66d9ef">external</span> {
+</span></span><span style="display:flex;"><span>		vm.startBroadcast(prv);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// lock
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint256</span> r2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xe5648161e95dbf2bfc687b72b745269fa906031e2108118050aba59524a23c40</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint256</span> s2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x70026fc30e4e02a15468de57155b080f405bd5b88af05412a9c3217e028537e3</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint256</span> v2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">27</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// setAdmin
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint256</span> r1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xe5648161e95dbf2bfc687b72b745269fa906031e2108118050aba59524a23c40</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint256</span> s1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4c3ac03b268ae1d2aca1201e8a936adf578a8b95a49986d54de87cd0ccb68a79</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint256</span> v1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">27</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// recovering the z&#39;s (hashes of signed messages)
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint256</span> nonce <span style="color:#f92672">=</span> instance.nonce();
+</span></span><span style="display:flex;"><span>		nonce <span style="color:#f92672">-=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">string</span> <span style="color:#66d9ef">memory</span> message2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;lock&#34;</span>, Strings.toString(nonce)));
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">bytes32</span> z2 <span style="color:#f92672">=</span> instance.hash_message(message2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		nonce<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> newAdmin <span style="color:#f92672">=</span> instance.admin();
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">string</span> <span style="color:#66d9ef">memory</span> message1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;admin&#34;</span>, Strings.toString(nonce), newAdmin));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes32</span> z1 <span style="color:#f92672">=</span> instance.hash_message(message1);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		console.logBytes32(z1);
+</span></span><span style="display:flex;"><span>		console.logBytes32(z2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">uint256</span> victimPrivateKey <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x10a6891de55baf453d66c5faede86eabccf93f3d284540d205f24207670855cc</span>; <span style="color:#75715e">// got from the Sagemath script
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">string</span> <span style="color:#66d9ef">memory</span> message <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;admin&#34;</span>, Strings.toString(instance.nonce()), me));
+</span></span><span style="display:flex;"><span>		(<span style="color:#66d9ef">uint8</span> v, <span style="color:#66d9ef">bytes32</span> r, <span style="color:#66d9ef">bytes32</span> s) <span style="color:#f92672">=</span> vm.sign(victimPrivateKey, instance.hash_message(message));
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> forgedSignature <span style="color:#f92672">=</span> <span style="color:#66d9ef">bytes</span>.concat(r, s, <span style="color:#66d9ef">bytes1</span>(v));
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>		instance.setAdmin(forgedSignature, me);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		message <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>(abi.encodePacked(<span style="color:#e6db74">&#34;lock&#34;</span>, Strings.toString(instance.nonce())));
+</span></span><span style="display:flex;"><span>		(v, r, s) <span style="color:#f92672">=</span> vm.sign(victimPrivateKey, instance.hash_message(message));
+</span></span><span style="display:flex;"><span>		forgedSignature <span style="color:#f92672">=</span> <span style="color:#66d9ef">bytes</span>.concat(r, s, <span style="color:#66d9ef">bytes1</span>(v));
+</span></span><span style="display:flex;"><span>		instance.switchLock(forgedSignature);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		console.logBytes32(<span style="color:#66d9ef">bytes32</span>(<span style="color:#66d9ef">address</span>(instance).balance)); <span style="color:#75715e">// before
+</span></span></span><span style="display:flex;"><span>		instance.withdraw();
+</span></span><span style="display:flex;"><span>		console.logBytes32(<span style="color:#66d9ef">bytes32</span>(<span style="color:#66d9ef">address</span>(instance).balance)); <span style="color:#75715e">// after
+</span></span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		vm.stopBroadcast();
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>Script ran successfully.
+
+== Logs ==
+  0x6a0d6cd0c2ca5d901d94d52e8d9484e4452a3668ae20d63088909611a7dccc51
+  0x937fa99fb61f6cd81c00ddda80cc218c11c9a731d54ce8859cb2309c77b79bf3
+  0x00000000000000000000000000000000000000000000000000038d7ea4c68000
+  0x0000000000000000000000000000000000000000000000000000000000000000
+
+## Setting up 1 EVM.
+
+==========================
+
+Chain 11155111
+
+Estimated gas price: 1.891920509 gwei
+
+Estimated total gas used for script: 158466
+
+Estimated amount required: 0.000299805075379194 ETH
+</code></pre><p>Notes:</p>
+<ul>
+<li>In the logs, the first 32 bytes are the hash of the first message signed by the owner $z_1$ and the second is the second hash $z_2$.</li>
+<li>The third and forth 32 bytes are the balances of the contract before and after the withdraw respectively.</li>
+<li>The forth is 0x0 meaning the drain of the contract was a success.</li>
+</ul>
+<h3 id="submitting-the-instance-">Submitting the Instance :<a hidden class="anchor" aria-hidden="true" href="#submitting-the-instance-">#</a></h3>
+<p><em>Congratulations! You&rsquo;ve successfully unlocked another secret of the elliptic curve signatures!</em></p>
+<p><em>It is very important to never reuse the same nonce for two signatures. RFC6979 defines a deterministic digital signature generation procedure which removes the risks of reusing twice the same nonce.</em></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+  </main>
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">My New Hugo Site</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+</html>
+
