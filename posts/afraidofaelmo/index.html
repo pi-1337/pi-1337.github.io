@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
   <title>AfraidOfAelmo</title>
 
@@ -18,8 +18,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>AfraidOfAelmo | Cryptography &amp; Blockchain Blog</title>
+<meta name="robots" content="index, follow">
+<title>AfraidOfAelmo | My New Hugo Site</title>
 <meta name="keywords" content="">
 <meta name="description" content="Zero-Knowledge Challenge Write-up
 The the challenge is a Zero Knowledge Scheme, where the server tries to prove to the player their knowledge of a witness $w$ (which is the flag), without revealing the witness.
@@ -77,16 +77,16 @@ if __name__ == &#34;__main__&#34;:
     main()
 This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of $(a, e, z)$, where a $a$ is the commitment , $e$ is the challenge and $z$ is the response of the prover.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/afraidofaelmo/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="canonical" href="https://pi-1337.github.io/crypto-writeups/posts/afraidofaelmo/">
+<link crossorigin="anonymous" href="/crypto-writeups/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://pi-1337.github.io/crypto-writeups/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://pi-1337.github.io/crypto-writeups/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://pi-1337.github.io/crypto-writeups/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://pi-1337.github.io/crypto-writeups/apple-touch-icon.png">
+<link rel="mask-icon" href="https://pi-1337.github.io/crypto-writeups/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/afraidofaelmo/">
+<link rel="alternate" hreflang="en" href="https://pi-1337.github.io/crypto-writeups/posts/afraidofaelmo/">
 <noscript>
     <style>
         #theme-toggle,
@@ -138,11 +138,128 @@ This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of 
         document.querySelector("html").dataset.theme = 'light';
     }
 
+</script><meta property="og:url" content="https://pi-1337.github.io/crypto-writeups/posts/afraidofaelmo/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="AfraidOfAelmo">
+  <meta property="og:description" content="Zero-Knowledge Challenge Write-up The the challenge is a Zero Knowledge Scheme, where the server tries to prove to the player their knowledge of a witness $w$ (which is the flag), without revealing the witness.
+The Script: FLAG = os.getenv(&#34;FLAG&#34;, &#34;Lorem ipsum dolor sit amet consectetur adipiscing elit. Pretium tellus duis convallis tempus leo eu aenean. Iaculis massa nisl malesuada lacinia integer nunc posuere. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Nulla molestie mattis scelerisque maximus eget fermentum odio. Blandit quis suspendisse aliquet nisi sodales consequat magna. Ligula congue sollicitudin erat viverra ac tincidunt nam. Velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper. Dui felis venenatis ultrices proin libero feugiat tristique. Cubilia curae hac habitasse platea dictumst lorem ipsum. Sem placerat in id cursus mi pretium tellus. Fringilla lacus nec metus bibendum egestas iaculis massa. Taciti sociosqu ad litora torquent per conubia nostra. Ridiculus mus donec rhoncus eros lobortis nulla molestie. Mauris pharetra vestibulum fusce dictum risus blandit quis. Finibus facilisis dapibus etiam interdum tortor ligula congue. Justo lectus commodo augue arcu dignissim velit aliquam. Primis vulputate ornare sagittis vehicula praesent dui felis. Senectus netus suscipit auctor curabitur facilisi cubilia curae. Quisque faucibus ex sapien vitae pellentesque sem placerat. flag{dGhpbmtfeW91J3JlX3NtYXJ0X2h1aD8=}&#34;).encode() class ZKP: def __init__(self): self.p = getPrime(256) self.q = getPrime(256) self.g = 2 self.w = b2l(FLAG) self.y = pow(self.g, self.w, self.p) def prover(self): r = randbelow(1 &lt;&lt; 200) a = pow(self.g, r, self.p) e = randbelow(1 &lt;&lt; 256) z = (r &#43; self.w * e) % self.q proof = {&#34;a&#34;: a, &#34;e&#34;: e, &#34;z&#34;: z} return proof def __str__(self): return f&#34;ZKP PUBLIC PARAMETERS:\np = {self.p}\nq = {self.q}\ng = {self.g}\ny = {self.y}&#34; user = ZKP() menu = &#34;&#34;&#34; [1] Prover [2] Exit &#34;&#34;&#34; def main(): ctr = 0 print(user) print(f&#39;hint: {b2l(FLAG).bit_length()}...you\&#39;re welcome :)&#39;) while True: print(menu) choice = input(&#34;Select an option &gt; &#34;) if choice == &#39;1&#39;: if ctr &gt;= 6: print(&#34;You have reached the maximum number of proofs.&#34;) continue print(&#34;Prover selected.&#34;) print(f&#39;Here is your proof: {user.prover()}&#39;) ctr &#43;= 1 elif choice == &#39;2&#39;: print(&#34;Goodbye!&#34;) break else: print(&#34;Invalid option. Please try again.&#34;) if __name__ == &#34;__main__&#34;: main() This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of $(a, e, z)$, where a $a$ is the commitment , $e$ is the challenge and $z$ is the response of the prover.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-03T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AfraidOfAelmo">
+<meta name="twitter:description" content="Zero-Knowledge Challenge Write-up
+The the challenge is a Zero Knowledge Scheme, where the server tries to prove to the player their knowledge of a witness $w$ (which is the flag), without revealing the witness.
+The Script:
+FLAG  = os.getenv(&#34;FLAG&#34;, &#34;Lorem ipsum dolor sit amet consectetur adipiscing elit. Pretium tellus duis convallis tempus leo eu aenean. Iaculis massa nisl malesuada lacinia integer nunc posuere. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Nulla molestie mattis scelerisque maximus eget fermentum odio. Blandit quis suspendisse aliquet nisi sodales consequat magna. Ligula congue sollicitudin erat viverra ac tincidunt nam. Velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper. Dui felis venenatis ultrices proin libero feugiat tristique. Cubilia curae hac habitasse platea dictumst lorem ipsum. Sem placerat in id cursus mi pretium tellus. Fringilla lacus nec metus bibendum egestas iaculis massa. Taciti sociosqu ad litora torquent per conubia nostra. Ridiculus mus donec rhoncus eros lobortis nulla molestie. Mauris pharetra vestibulum fusce dictum risus blandit quis. Finibus facilisis dapibus etiam interdum tortor ligula congue. Justo lectus commodo augue arcu dignissim velit aliquam. Primis vulputate ornare sagittis vehicula praesent dui felis. Senectus netus suscipit auctor curabitur facilisi cubilia curae. Quisque faucibus ex sapien vitae pellentesque sem placerat. flag{dGhpbmtfeW91J3JlX3NtYXJ0X2h1aD8=}&#34;).encode()
+
+
+class ZKP:
+    def __init__(self):
+        self.p = getPrime(256)
+        self.q = getPrime(256) 
+        self.g = 2
+        self.w = b2l(FLAG) 
+        self.y = pow(self.g, self.w, self.p)
+    def prover(self):
+            r = randbelow(1 &lt;&lt; 200)
+            a = pow(self.g, r, self.p)
+            e = randbelow(1 &lt;&lt; 256)
+            z = (r &#43; self.w * e) % self.q
+            proof = {&#34;a&#34;: a, &#34;e&#34;: e, &#34;z&#34;: z}
+            return proof
+    def __str__(self):
+        return f&#34;ZKP PUBLIC PARAMETERS:\np = {self.p}\nq = {self.q}\ng = {self.g}\ny = {self.y}&#34;
+
+user = ZKP()
+
+menu = &#34;&#34;&#34;
+[1] Prover
+[2] Exit
+&#34;&#34;&#34;
+def main():
+    ctr = 0
+    print(user)
+    print(f&#39;hint: {b2l(FLAG).bit_length()}...you\&#39;re welcome :)&#39;)
+
+    while True:
+        print(menu)
+        choice = input(&#34;Select an option &gt; &#34;)
+        if choice == &#39;1&#39;:
+            if ctr &gt;= 6:
+                print(&#34;You have reached the maximum number of proofs.&#34;)
+                continue
+            
+            print(&#34;Prover selected.&#34;)
+            print(f&#39;Here is your proof: {user.prover()}&#39;)
+            ctr &#43;= 1
+
+        elif choice == &#39;2&#39;:
+            print(&#34;Goodbye!&#34;)
+            break
+        else:
+            print(&#34;Invalid option. Please try again.&#34;)
+
+if __name__ == &#34;__main__&#34;:
+    main()
+This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of $(a, e, z)$, where a $a$ is the commitment , $e$ is the challenge and $z$ is the response of the prover.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://pi-1337.github.io/crypto-writeups/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "AfraidOfAelmo",
+      "item": "https://pi-1337.github.io/crypto-writeups/posts/afraidofaelmo/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AfraidOfAelmo",
+  "name": "AfraidOfAelmo",
+  "description": "Zero-Knowledge Challenge Write-up The the challenge is a Zero Knowledge Scheme, where the server tries to prove to the player their knowledge of a witness $w$ (which is the flag), without revealing the witness.\nThe Script: FLAG = os.getenv(\u0026#34;FLAG\u0026#34;, \u0026#34;Lorem ipsum dolor sit amet consectetur adipiscing elit. Pretium tellus duis convallis tempus leo eu aenean. Iaculis massa nisl malesuada lacinia integer nunc posuere. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Nulla molestie mattis scelerisque maximus eget fermentum odio. Blandit quis suspendisse aliquet nisi sodales consequat magna. Ligula congue sollicitudin erat viverra ac tincidunt nam. Velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper. Dui felis venenatis ultrices proin libero feugiat tristique. Cubilia curae hac habitasse platea dictumst lorem ipsum. Sem placerat in id cursus mi pretium tellus. Fringilla lacus nec metus bibendum egestas iaculis massa. Taciti sociosqu ad litora torquent per conubia nostra. Ridiculus mus donec rhoncus eros lobortis nulla molestie. Mauris pharetra vestibulum fusce dictum risus blandit quis. Finibus facilisis dapibus etiam interdum tortor ligula congue. Justo lectus commodo augue arcu dignissim velit aliquam. Primis vulputate ornare sagittis vehicula praesent dui felis. Senectus netus suscipit auctor curabitur facilisi cubilia curae. Quisque faucibus ex sapien vitae pellentesque sem placerat. flag{dGhpbmtfeW91J3JlX3NtYXJ0X2h1aD8=}\u0026#34;).encode() class ZKP: def __init__(self): self.p = getPrime(256) self.q = getPrime(256) self.g = 2 self.w = b2l(FLAG) self.y = pow(self.g, self.w, self.p) def prover(self): r = randbelow(1 \u0026lt;\u0026lt; 200) a = pow(self.g, r, self.p) e = randbelow(1 \u0026lt;\u0026lt; 256) z = (r + self.w * e) % self.q proof = {\u0026#34;a\u0026#34;: a, \u0026#34;e\u0026#34;: e, \u0026#34;z\u0026#34;: z} return proof def __str__(self): return f\u0026#34;ZKP PUBLIC PARAMETERS:\\np = {self.p}\\nq = {self.q}\\ng = {self.g}\\ny = {self.y}\u0026#34; user = ZKP() menu = \u0026#34;\u0026#34;\u0026#34; [1] Prover [2] Exit \u0026#34;\u0026#34;\u0026#34; def main(): ctr = 0 print(user) print(f\u0026#39;hint: {b2l(FLAG).bit_length()}...you\\\u0026#39;re welcome :)\u0026#39;) while True: print(menu) choice = input(\u0026#34;Select an option \u0026gt; \u0026#34;) if choice == \u0026#39;1\u0026#39;: if ctr \u0026gt;= 6: print(\u0026#34;You have reached the maximum number of proofs.\u0026#34;) continue print(\u0026#34;Prover selected.\u0026#34;) print(f\u0026#39;Here is your proof: {user.prover()}\u0026#39;) ctr += 1 elif choice == \u0026#39;2\u0026#39;: print(\u0026#34;Goodbye!\u0026#34;) break else: print(\u0026#34;Invalid option. Please try again.\u0026#34;) if __name__ == \u0026#34;__main__\u0026#34;: main() This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of $(a, e, z)$, where a $a$ is the commitment , $e$ is the challenge and $z$ is the response of the prover.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Zero-Knowledge Challenge Write-up The the challenge is a Zero Knowledge Scheme, where the server tries to prove to the player their knowledge of a witness $w$ (which is the flag), without revealing the witness.\nThe Script: FLAG = os.getenv(\"FLAG\", \"Lorem ipsum dolor sit amet consectetur adipiscing elit. Pretium tellus duis convallis tempus leo eu aenean. Iaculis massa nisl malesuada lacinia integer nunc posuere. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Nulla molestie mattis scelerisque maximus eget fermentum odio. Blandit quis suspendisse aliquet nisi sodales consequat magna. Ligula congue sollicitudin erat viverra ac tincidunt nam. Velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper. Dui felis venenatis ultrices proin libero feugiat tristique. Cubilia curae hac habitasse platea dictumst lorem ipsum. Sem placerat in id cursus mi pretium tellus. Fringilla lacus nec metus bibendum egestas iaculis massa. Taciti sociosqu ad litora torquent per conubia nostra. Ridiculus mus donec rhoncus eros lobortis nulla molestie. Mauris pharetra vestibulum fusce dictum risus blandit quis. Finibus facilisis dapibus etiam interdum tortor ligula congue. Justo lectus commodo augue arcu dignissim velit aliquam. Primis vulputate ornare sagittis vehicula praesent dui felis. Senectus netus suscipit auctor curabitur facilisi cubilia curae. Quisque faucibus ex sapien vitae pellentesque sem placerat. flag{dGhpbmtfeW91J3JlX3NtYXJ0X2h1aD8=}\").encode() class ZKP: def __init__(self): self.p = getPrime(256) self.q = getPrime(256) self.g = 2 self.w = b2l(FLAG) self.y = pow(self.g, self.w, self.p) def prover(self): r = randbelow(1 \u003c\u003c 200) a = pow(self.g, r, self.p) e = randbelow(1 \u003c\u003c 256) z = (r + self.w * e) % self.q proof = {\"a\": a, \"e\": e, \"z\": z} return proof def __str__(self): return f\"ZKP PUBLIC PARAMETERS:\\np = {self.p}\\nq = {self.q}\\ng = {self.g}\\ny = {self.y}\" user = ZKP() menu = \"\"\" [1] Prover [2] Exit \"\"\" def main(): ctr = 0 print(user) print(f'hint: {b2l(FLAG).bit_length()}...you\\'re welcome :)') while True: print(menu) choice = input(\"Select an option \u003e \") if choice == '1': if ctr \u003e= 6: print(\"You have reached the maximum number of proofs.\") continue print(\"Prover selected.\") print(f'Here is your proof: {user.prover()}') ctr += 1 elif choice == '2': print(\"Goodbye!\") break else: print(\"Invalid option. Please try again.\") if __name__ == \"__main__\": main() This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of $(a, e, z)$, where a $a$ is the commitment , $e$ is the challenge and $z$ is the response of the prover.\nThe straight-forward attack vector is to recover $r$ from $a$ and use it to recover the witness. But since recovering $r$ from $a$ is an instance of the DLP in $\\mathbb{F}_p$ (Discrete Logarithm problem on a finite field), and DLP is considered a hard problem, then this approach is not feasible.\nLLL : The key here is that the random generated number $r$ is bounded by $(1 « 200)$ or $2^{200}$ while the modulus q is much larger (256 bits), this tells us that we can treat the number $r$ as the error term in the Hidden Number Problem (HNP) equation, and with enough equation we may be able to recover the secret which is the witness using Lattice Reduction Technique . So:\n$$z = (r + w \\cdot e) \\bmod q$$ Becomes the HNP equation. we just need enough samples of $(z, e)$, it turns out 6 samples are enough. enough to recover the $w \\bmod q$.\nCRT : Doing this only gets the witness mod q, also note that we can do this over and over by closing the connection and restarting it, and of course with different primes. Thus allowing as to recover the full witness using Chinese Remainder Theorem (CRT) which states that given equations :\n$$ x \\equiv a_1 \\pmod{m_1} \\ $$\n$$ x \\equiv a_2 \\pmod{m_2} \\ $$\n$$ \\vdots \\ $$\n$$ x \\equiv a_k \\pmod{m_k} $$\nOne can recover $x$ Uniquely using CRT which is already implemented in sagemath, so the final script is this, its an extension of this script https://github.com/josephsurin/lattice-based-cryptanalysis/blob/main/examples/problems/hidden_number_problem.sage :\nfrom Crypto.Util.number import long_to_bytes data = [{}] # this is got from the data script below def hnp_example(q, proofs): B = 1 \u003c\u003c 200 T = [] A = [] for d in proofs: T.append(d[\"e\"]) A.append(d[\"z\"]) sol = hnp(q, T, A, B, verbose=True) print(\"Recovered solution:\", sol) w_mod_q = sol % q return w_mod_q, q reminders = [] modulues = [] for session in data: wq, mod = hnp_example(session[\"q\"], session[\"proofs\"]) reminders.append(wq) modulues.append(mod) W = crt(reminders, modulues) print(\"Recovered w bitlen:\", int(W).bit_length()) print(\"Recovered FLAG:\") print(long_to_bytes(W)) I used this repo [[https://github.com/josephsurin/lattice-based-cryptanalysis]] .\nDATA : This is the script to get data from the server in python : ChatGPT did good job here.\nfrom pwn import * import re import ast HOST = \"4786170ad621653c.chal.ctf.ae\" PORT = 443 def collect_all(): sessions = [] for S in range(40): print(f\"[+] Starting session {S+1}/10\") s = remote(HOST, PORT, ssl=True, sni=HOST) banner = s.recvuntil(b\"[2] Exit\").decode() # --------------------------- # Extract metadata # --------------------------- md = {} md[\"p\"] = int(re.search(r\"p = (\\d+)\", banner).group(1)) md[\"q\"] = int(re.search(r\"q = (\\d+)\", banner).group(1)) md[\"g\"] = int(re.search(r\"g = (\\d+)\", banner).group(1)) md[\"y\"] = int(re.search(r\"y = (\\d+)\", banner).group(1)) md[\"bitlen\"] = int(re.search(r\"hint: (\\d+)\", banner).group(1)) md[\"proofs\"] = [] # --------------------------- # Get 6 proofs # --------------------------- for i in range(6): s.sendline(b\"1\") line = s.recvline_contains(b\"proof\").decode() # Extract dict {\"a\":..., \"e\":..., \"z\":...} proof_dict = ast.literal_eval(line.split(\"proof:\")[1].strip()) md[\"proofs\"].append({ \"a\": proof_dict[\"a\"], \"e\": proof_dict[\"e\"], \"z\": proof_dict[\"z\"] }) s.close() sessions.append(md) return sessions if name == \"main\": data = collect_all() print(\"\\n=== FIRST SESSION ===\") print(data) print(f\"\\n[+] Total sessions collected: {len(data)}\") print(\"[+] Each session contains its own parameters + 6 proofs.\") ",
+  "wordCount" : "894",
+  "inLanguage": "en",
+  "datePublished": "2026-02-03T00:00:00Z",
+  "dateModified": "2026-02-03T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pi-1337.github.io/crypto-writeups/posts/afraidofaelmo/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "My New Hugo Site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pi-1337.github.io/crypto-writeups/favicon.ico"
+    }
+  }
+}
 </script></head>
 <body><header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Cryptography &amp; Blockchain Blog (Alt + H)">Cryptography &amp; Blockchain Blog</a>
+            <a href="https://pi-1337.github.io/crypto-writeups/" accesskey="h" title="My New Hugo Site (Alt + H)">My New Hugo Site</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -359,7 +476,7 @@ ChatGPT did good job here.</p>
 </article>
   </main>
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">Cryptography &amp; Blockchain Blog</a></span> · 
+        <span>&copy; 2026 <a href="https://pi-1337.github.io/crypto-writeups/">My New Hugo Site</a></span> · 
 
     <span>
         Powered by

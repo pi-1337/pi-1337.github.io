@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
   <title>why2025-Somkracht-65537</title>
 
@@ -18,8 +18,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>why2025-Somkracht-65537 | Cryptography &amp; Blockchain Blog</title>
+<meta name="robots" content="index, follow">
+<title>why2025-Somkracht-65537 | My New Hugo Site</title>
 <meta name="keywords" content="">
 <meta name="description" content="🎯 The Challenge
 This is a fun RSA challenge with an interesting twist! Instead of factoring the modulus (N), we recover the message directly using a clever insight.
@@ -39,16 +39,16 @@ $$
 
 Note: Primes (p, q) are huge, so factoring (N) is infeasible, but the leak opens a new attack vector.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/why2025-somkracht-65537/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="canonical" href="https://pi-1337.github.io/crypto-writeups/posts/why2025-somkracht-65537/">
+<link crossorigin="anonymous" href="/crypto-writeups/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://pi-1337.github.io/crypto-writeups/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://pi-1337.github.io/crypto-writeups/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://pi-1337.github.io/crypto-writeups/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://pi-1337.github.io/crypto-writeups/apple-touch-icon.png">
+<link rel="mask-icon" href="https://pi-1337.github.io/crypto-writeups/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/why2025-somkracht-65537/">
+<link rel="alternate" hreflang="en" href="https://pi-1337.github.io/crypto-writeups/posts/why2025-somkracht-65537/">
 <noscript>
     <style>
         #theme-toggle,
@@ -100,11 +100,93 @@ Note: Primes (p, q) are huge, so factoring (N) is infeasible, but the leak opens
         document.querySelector("html").dataset.theme = 'light';
     }
 
+</script><meta property="og:url" content="https://pi-1337.github.io/crypto-writeups/posts/why2025-somkracht-65537/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="why2025-Somkracht-65537">
+  <meta property="og:description" content="🎯 The Challenge This is a fun RSA challenge with an interesting twist! Instead of factoring the modulus (N), we recover the message directly using a clever insight.
+Given: Public Key: $$ ((e, N)) $$
+Ciphertext (encrypted in regular RSA): $$ ct_1 = m^e \bmod N $$
+Additionnal leak (this is unusual in secure RSA): $$ ct_2 = m^{p&#43;q} \bmod N $$
+Note: Primes (p, q) are huge, so factoring (N) is infeasible, but the leak opens a new attack vector.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-03T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="why2025-Somkracht-65537">
+<meta name="twitter:description" content="🎯 The Challenge
+This is a fun RSA challenge with an interesting twist! Instead of factoring the modulus (N), we recover the message directly using a clever insight.
+Given:
+Public Key:
+$$
+((e, N))
+$$
+Ciphertext (encrypted in regular RSA):
+$$
+ct_1 = m^e \bmod N
+$$
+Additionnal leak (this is unusual in secure RSA):
+$$
+ct_2 = m^{p&#43;q} \bmod N
+$$
+
+Note: Primes (p, q) are huge, so factoring (N) is infeasible, but the leak opens a new attack vector.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://pi-1337.github.io/crypto-writeups/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "why2025-Somkracht-65537",
+      "item": "https://pi-1337.github.io/crypto-writeups/posts/why2025-somkracht-65537/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "why2025-Somkracht-65537",
+  "name": "why2025-Somkracht-65537",
+  "description": "🎯 The Challenge This is a fun RSA challenge with an interesting twist! Instead of factoring the modulus (N), we recover the message directly using a clever insight.\nGiven: Public Key: $$ ((e, N)) $$\nCiphertext (encrypted in regular RSA): $$ ct_1 = m^e \\bmod N $$\nAdditionnal leak (this is unusual in secure RSA): $$ ct_2 = m^{p+q} \\bmod N $$\nNote: Primes (p, q) are huge, so factoring (N) is infeasible, but the leak opens a new attack vector.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "🎯 The Challenge This is a fun RSA challenge with an interesting twist! Instead of factoring the modulus (N), we recover the message directly using a clever insight.\nGiven: Public Key: $$ ((e, N)) $$\nCiphertext (encrypted in regular RSA): $$ ct_1 = m^e \\bmod N $$\nAdditionnal leak (this is unusual in secure RSA): $$ ct_2 = m^{p+q} \\bmod N $$\nNote: Primes (p, q) are huge, so factoring (N) is infeasible, but the leak opens a new attack vector.\n💡 The Solution Approach Euler’s Totient: $$ \\phi(N) = (p-1)(q-1) = pq - p - q + 1 = N + 1 - (p + q) $$\nEuler’s theorem: $$ a^{\\phi(N)} \\equiv 1 \\pmod{N} \\implies a^{\\phi(N) + 1} \\equiv a \\pmod{N} $$\nThe trick: Express (N) as\n$$ N = \\alpha e + \\beta, \\quad \\text{with } \\beta \u003c e $$\nDefine\n$$ \\gamma = e - \\beta - 1 $$\nso\n$$ e = \\gamma + \\beta + 1 $$\nKey calculation: $$ m_{\\to \\gamma} \\equiv ct_1^{\\alpha + 1} \\cdot ct_2^{-1} \\bmod N \\ $$\n$$ \\equiv m^{e(\\alpha + 1)} \\cdot m^{-(p+q)} \\bmod N \\ $$\n$$ \\equiv m^{e\\alpha + e - (p+q)} \\bmod N \\ $$\n$$ \\equiv m^{N + \\gamma + 1 - (p+q)} \\bmod N \\ $$\n$$ \\equiv m^{\\phi(N) + \\gamma} \\bmod N \\ $$\n$$ \\equiv m^{\\phi(N)} \\cdot m^{\\gamma} \\bmod N \\ $$\n$$ \\equiv 1 \\cdot m^{\\gamma} \\bmod N \\ $$\n$$ \\equiv m^{\\gamma} \\bmod N $$\nRecovering (m) with Bézout’s lemma: Since\n$$ \\gcd(e, \\gamma) = 1 $$\nthere exist integers (x, y) with\n$$ e x + \\gamma y = 1 $$\nThus\n$$ m = (ct_1^x \\cdot m_{\\to \\gamma}^y) \\bmod N $$\nbecause\n$$ (ct_1^x \\cdot m_{\\to \\gamma}^y) \\bmod N \\equiv (m^{e x} \\cdot m^{\\gamma y}) \\bmod N \\ $$\n$$ \\equiv m^{e x + \\gamma y} \\bmod N \\ $$\n$$ \\equiv m^1 \\bmod N \\ $$\n$$ \\equiv m \\bmod N $$\n🖥️ Implementation from Crypto.Util.number import long_to_bytes # Given e = 65537 N = \u003cvery_large_number\u003e ct1 = \u003cciphertext_1\u003e ct2 = \u003cciphertext_2\u003e alpha = N // e beta = N % e gamma = e - beta - 1 print(f\"alpha = {alpha}, beta = {beta}, gamma = {gamma}\") m_to_gamma = (pow(ct1, alpha + 1, N) * pow(ct2, -1, N)) % N def extended_gcd(a, b): if a == 0: return (b, 0, 1) gcd, x1, y1 = extended_gcd(b % a, a) x = y1 - (b // a) * x1 y = x1 return (gcd, x, y) gcd, x, y = extended_gcd(e, gamma) flag = (pow(ct1, x, N) * pow(m_to_gamma, y, N)) % N print(\"Recovered flag:\", long_to_bytes(flag)) ",
+  "wordCount" : "439",
+  "inLanguage": "en",
+  "datePublished": "2026-02-03T00:00:00Z",
+  "dateModified": "2026-02-03T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pi-1337.github.io/crypto-writeups/posts/why2025-somkracht-65537/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "My New Hugo Site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pi-1337.github.io/crypto-writeups/favicon.ico"
+    }
+  }
+}
 </script></head>
 <body><header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Cryptography &amp; Blockchain Blog (Alt + H)">Cryptography &amp; Blockchain Blog</a>
+            <a href="https://pi-1337.github.io/crypto-writeups/" accesskey="h" title="My New Hugo Site (Alt + H)">My New Hugo Site</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -280,7 +362,7 @@ $$</p>
 </article>
   </main>
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">Cryptography &amp; Blockchain Blog</a></span> · 
+        <span>&copy; 2026 <a href="https://pi-1337.github.io/crypto-writeups/">My New Hugo Site</a></span> · 
 
     <span>
         Powered by
