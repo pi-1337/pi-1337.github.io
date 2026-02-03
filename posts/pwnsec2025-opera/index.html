@@ -90,16 +90,16 @@ if __name__==&#34;__main__&#34;: main()%
 High level :
 The challenge is consisted of two layers of &ldquo;pseudo-random generator LCG&rdquo; and an RSA scheme, and the two layers have very clear vulnerabilities.">
 <meta name="author" content="">
-<link rel="canonical" href="https://pi-1337.github.io/crypto-writeups/posts/pwnsec2025-opera/">
-<link crossorigin="anonymous" href="/crypto-writeups/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://pi-1337.github.io/crypto-writeups/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://pi-1337.github.io/crypto-writeups/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://pi-1337.github.io/crypto-writeups/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://pi-1337.github.io/crypto-writeups/apple-touch-icon.png">
-<link rel="mask-icon" href="https://pi-1337.github.io/crypto-writeups/safari-pinned-tab.svg">
+<link rel="canonical" href="https://pi-1337.github.io/posts/pwnsec2025-opera/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://pi-1337.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://pi-1337.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://pi-1337.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://pi-1337.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://pi-1337.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://pi-1337.github.io/crypto-writeups/posts/pwnsec2025-opera/">
+<link rel="alternate" hreflang="en" href="https://pi-1337.github.io/posts/pwnsec2025-opera/">
 <noscript>
     <style>
         #theme-toggle,
@@ -151,7 +151,7 @@ The challenge is consisted of two layers of &ldquo;pseudo-random generator LCG&r
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://pi-1337.github.io/crypto-writeups/posts/pwnsec2025-opera/">
+</script><meta property="og:url" content="https://pi-1337.github.io/posts/pwnsec2025-opera/">
   <meta property="og:site_name" content="My New Hugo Site">
   <meta property="og:title" content="PwnSec2025-Opera">
   <meta property="og:description" content="Challenge : #!/usr/bin/env python3 from Crypto.Util.number import getPrime, bytes_to_long, long_to_bytes from pwn import xor import os, sys, random FLAG = os.getenv(&#34;FLAG&#34;, &#34;flag{b3n34th_th3_m45k_pwnsecsocool}&#34;).encode() class LCG: def __init__(self, m=1&lt;&lt;64): self.m = m self.a = random.getrandbits(64)|1 self.c = random.getrandbits(64)|1 self.x = random.getrandbits(64) def next(self): self.x=(self.a*self.x&#43;self.c)%self.m return self.x def stream(self, n): out=b&#34;&#34; while len(out)&lt;n: out&#43;=self.next().to_bytes(8,&#34;big&#34;) return out[:n] class RSA: def __init__(self, bits=512, e=65537): self.e=e self.p=getPrime(bits//2) self.q=getPrime(bits//2) self.n=self.p*self.q def enc(self, m_bytes, mod): k=(mod.bit_length()&#43;7)//8 m=bytes_to_long(m_bytes) assert m&lt;mod return long_to_bytes(pow(m,self.e,mod),k) def main(): random.seed(os.urandom(16)) rsa, lcg = RSA(bits=512), LCG() Cflag = rsa.enc(FLAG, rsa.n) enc_flag = xor(Cflag, lcg.stream(len(Cflag))) menu=&#34;1) get encrypted flag\n2) encrypt your input\n3) exit\n&gt; &#34; while True: try: c=input(menu).strip() if c==&#34;1&#34;: print(enc_flag.hex()) print(rsa.n) elif c==&#34;2&#34;: s=input(&#34;&gt; &#34;) m=s.encode() if bytes_to_long(m)&gt;=rsa.p: print(&#34;too long&#34;) continue C=rsa.enc(m, rsa.p) print(xor(C, lcg.stream(len(C))).hex()) elif c==&#34;3&#34;: print(&#34;bye&#34;) return else: print(&#34;don&#39;t waste our time&#34;) return except: print(&#34;error&#34;) sys.exit(0) if __name__==&#34;__main__&#34;: main()% High level : The challenge is consisted of two layers of “pseudo-random generator LCG” and an RSA scheme, and the two layers have very clear vulnerabilities.">
@@ -241,13 +241,13 @@ The challenge is consisted of two layers of &ldquo;pseudo-random generator LCG&r
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://pi-1337.github.io/crypto-writeups/posts/"
+      "item": "https://pi-1337.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "PwnSec2025-Opera",
-      "item": "https://pi-1337.github.io/crypto-writeups/posts/pwnsec2025-opera/"
+      "item": "https://pi-1337.github.io/posts/pwnsec2025-opera/"
     }
   ]
 }
@@ -269,14 +269,14 @@ The challenge is consisted of two layers of &ldquo;pseudo-random generator LCG&r
   "dateModified": "2025-05-03T00:00:00Z",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://pi-1337.github.io/crypto-writeups/posts/pwnsec2025-opera/"
+    "@id": "https://pi-1337.github.io/posts/pwnsec2025-opera/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "My New Hugo Site",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://pi-1337.github.io/crypto-writeups/favicon.ico"
+      "url": "https://pi-1337.github.io/favicon.ico"
     }
   }
 }
@@ -284,7 +284,7 @@ The challenge is consisted of two layers of &ldquo;pseudo-random generator LCG&r
 <body><header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://pi-1337.github.io/crypto-writeups/" accesskey="h" title="My New Hugo Site (Alt + H)">My New Hugo Site</a>
+            <a href="https://pi-1337.github.io/" accesskey="h" title="My New Hugo Site (Alt + H)">My New Hugo Site</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -547,7 +547,7 @@ $$</p>
 </article>
   </main>
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://pi-1337.github.io/crypto-writeups/">My New Hugo Site</a></span> · 
+        <span>&copy; 2026 <a href="https://pi-1337.github.io/">My New Hugo Site</a></span> · 
 
     <span>
         Powered by

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>My New Hugo Site</title>
-    <link>https://pi-1337.github.io/crypto-writeups/</link>
+    <link>https://pi-1337.github.io/</link>
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- 0.155.2</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 03 Feb 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://pi-1337.github.io/crypto-writeups/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pi-1337.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AfraidOfAelmo</title>
-      <link>https://pi-1337.github.io/crypto-writeups/posts/afraidofaelmo/</link>
+      <link>https://pi-1337.github.io/posts/afraidofaelmo/</link>
       <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://pi-1337.github.io/crypto-writeups/posts/afraidofaelmo/</guid>
+      <guid>https://pi-1337.github.io/posts/afraidofaelmo/</guid>
       <description>&lt;h1 id=&#34;zero-knowledge-challenge-write-up&#34;&gt;Zero-Knowledge Challenge Write-up&lt;/h1&gt;
 &lt;p&gt;The the challenge is a Zero Knowledge Scheme, where the server tries to prove to the player their knowledge of a witness $w$ (which is the flag), without revealing the &lt;em&gt;witness&lt;/em&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;the-script&#34;&gt;The Script:&lt;/h1&gt;
@@ -71,9 +71,9 @@
     </item>
     <item>
       <title>ImpersonatorTwo</title>
-      <link>https://pi-1337.github.io/crypto-writeups/posts/impersonatortwo/</link>
+      <link>https://pi-1337.github.io/posts/impersonatortwo/</link>
       <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://pi-1337.github.io/crypto-writeups/posts/impersonatortwo/</guid>
+      <guid>https://pi-1337.github.io/posts/impersonatortwo/</guid>
       <description>&lt;h2 id=&#34;it-works-&#34;&gt;It works 🎉&lt;/h2&gt;
 &lt;h1 id=&#34;write-up-for-impersonatortwo-challenge-from-ethernaut-ctf&#34;&gt;Write-up for ImpersonatorTwo challenge from Ethernaut CTF&lt;/h1&gt;
 &lt;p&gt;This challenge is a part of &lt;a href=&#34;https://ethernaut.openzeppelin.com&#34;&gt;The Ethernaut CTF&lt;/a&gt; and It is the 37th challenge.
@@ -92,9 +92,9 @@ This is the description of the challenge:&lt;/p&gt;
     </item>
     <item>
       <title>why2025-Somkracht-65537</title>
-      <link>https://pi-1337.github.io/crypto-writeups/posts/why2025-somkracht-65537/</link>
+      <link>https://pi-1337.github.io/posts/why2025-somkracht-65537/</link>
       <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://pi-1337.github.io/crypto-writeups/posts/why2025-somkracht-65537/</guid>
+      <guid>https://pi-1337.github.io/posts/why2025-somkracht-65537/</guid>
       <description>&lt;h2 id=&#34;-the-challenge&#34;&gt;🎯 The Challenge&lt;/h2&gt;
 &lt;p&gt;This is a fun RSA challenge with an interesting twist! Instead of factoring the modulus (N), we recover the message directly using a clever insight.&lt;/p&gt;
 &lt;h3 id=&#34;given&#34;&gt;Given:&lt;/h3&gt;
@@ -115,9 +115,9 @@ $$&lt;/p&gt;
     </item>
     <item>
       <title>PwnSec2025-Opera</title>
-      <link>https://pi-1337.github.io/crypto-writeups/posts/pwnsec2025-opera/</link>
+      <link>https://pi-1337.github.io/posts/pwnsec2025-opera/</link>
       <pubDate>Sat, 03 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://pi-1337.github.io/crypto-writeups/posts/pwnsec2025-opera/</guid>
+      <guid>https://pi-1337.github.io/posts/pwnsec2025-opera/</guid>
       <description>&lt;h1 id=&#34;challenge-&#34;&gt;Challenge :&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env python3&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; Crypto.Util.number &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; getPrime, bytes_to_long, long_to_bytes
