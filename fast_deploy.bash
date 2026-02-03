@@ -1,5 +1,6 @@
 
-hugo build --baseURL=https://pi-1337.github.io/crypto-writeups/
+hugo build
+# --baseURL=https://pi-1337.github.io/crypto-writeups/
 
 cp -fr public/* build/
 cd build/
