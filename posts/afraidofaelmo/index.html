@@ -19,7 +19,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>AfraidOfAelmo | My New Hugo Site</title>
+<title>AfraidOfAelmo | Cryptography &amp; Blockchain blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="Zero-Knowledge Challenge Write-up
 The the challenge is a Zero Knowledge Scheme, where the server tries to prove to the player their knowledge of a witness $w$ (which is the flag), without revealing the witness.
@@ -139,7 +139,7 @@ This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of 
     }
 
 </script><meta property="og:url" content="https://pi-1337.github.io/posts/afraidofaelmo/">
-  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:site_name" content="Cryptography & Blockchain blog">
   <meta property="og:title" content="AfraidOfAelmo">
   <meta property="og:description" content="Zero-Knowledge Challenge Write-up The the challenge is a Zero Knowledge Scheme, where the server tries to prove to the player their knowledge of a witness $w$ (which is the flag), without revealing the witness.
 The Script: FLAG = os.getenv(&#34;FLAG&#34;, &#34;Lorem ipsum dolor sit amet consectetur adipiscing elit. Pretium tellus duis convallis tempus leo eu aenean. Iaculis massa nisl malesuada lacinia integer nunc posuere. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Nulla molestie mattis scelerisque maximus eget fermentum odio. Blandit quis suspendisse aliquet nisi sodales consequat magna. Ligula congue sollicitudin erat viverra ac tincidunt nam. Velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper. Dui felis venenatis ultrices proin libero feugiat tristique. Cubilia curae hac habitasse platea dictumst lorem ipsum. Sem placerat in id cursus mi pretium tellus. Fringilla lacus nec metus bibendum egestas iaculis massa. Taciti sociosqu ad litora torquent per conubia nostra. Ridiculus mus donec rhoncus eros lobortis nulla molestie. Mauris pharetra vestibulum fusce dictum risus blandit quis. Finibus facilisis dapibus etiam interdum tortor ligula congue. Justo lectus commodo augue arcu dignissim velit aliquam. Primis vulputate ornare sagittis vehicula praesent dui felis. Senectus netus suscipit auctor curabitur facilisi cubilia curae. Quisque faucibus ex sapien vitae pellentesque sem placerat. flag{dGhpbmtfeW91J3JlX3NtYXJ0X2h1aD8=}&#34;).encode() class ZKP: def __init__(self): self.p = getPrime(256) self.q = getPrime(256) self.g = 2 self.w = b2l(FLAG) self.y = pow(self.g, self.w, self.p) def prover(self): r = randbelow(1 &lt;&lt; 200) a = pow(self.g, r, self.p) e = randbelow(1 &lt;&lt; 256) z = (r &#43; self.w * e) % self.q proof = {&#34;a&#34;: a, &#34;e&#34;: e, &#34;z&#34;: z} return proof def __str__(self): return f&#34;ZKP PUBLIC PARAMETERS:\np = {self.p}\nq = {self.q}\ng = {self.g}\ny = {self.y}&#34; user = ZKP() menu = &#34;&#34;&#34; [1] Prover [2] Exit &#34;&#34;&#34; def main(): ctr = 0 print(user) print(f&#39;hint: {b2l(FLAG).bit_length()}...you\&#39;re welcome :)&#39;) while True: print(menu) choice = input(&#34;Select an option &gt; &#34;) if choice == &#39;1&#39;: if ctr &gt;= 6: print(&#34;You have reached the maximum number of proofs.&#34;) continue print(&#34;Prover selected.&#34;) print(f&#39;Here is your proof: {user.prover()}&#39;) ctr &#43;= 1 elif choice == &#39;2&#39;: print(&#34;Goodbye!&#34;) break else: print(&#34;Invalid option. Please try again.&#34;) if __name__ == &#34;__main__&#34;: main() This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of $(a, e, z)$, where a $a$ is the commitment , $e$ is the challenge and $z$ is the response of the prover.">
@@ -248,7 +248,7 @@ This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of 
   },
   "publisher": {
     "@type": "Organization",
-    "name": "My New Hugo Site",
+    "name": "Cryptography \u0026 Blockchain blog",
     "logo": {
       "@type": "ImageObject",
       "url": "https://pi-1337.github.io/favicon.ico"
@@ -259,7 +259,7 @@ This is a Zero-knowledge Scheme, the $witness$ is $w$ and proof is consisted of 
 <body><header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://pi-1337.github.io/" accesskey="h" title="My New Hugo Site (Alt + H)">My New Hugo Site</a>
+            <a href="https://pi-1337.github.io/" accesskey="h" title="Cryptography &amp; Blockchain blog (Alt + H)">Cryptography &amp; Blockchain blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -476,7 +476,7 @@ ChatGPT did good job here.</p>
 </article>
   </main>
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://pi-1337.github.io/">My New Hugo Site</a></span> · 
+        <span>&copy; 2026 <a href="https://pi-1337.github.io/">Cryptography &amp; Blockchain blog</a></span> · 
 
     <span>
         Powered by
