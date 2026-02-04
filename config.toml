@@ -1,6 +1,6 @@
 baseURL = 'https://pi-1337.github.io/'
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Cryptography & Blockchain blog"
 theme = "PaperMod"
 [params]
 mainSections = ["posts"]
